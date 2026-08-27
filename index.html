@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -12,19 +12,30 @@
         }
 
         :root {
-            --primary: #7c8a6e;
-            --primary-dark: #6a7a5c;
-            --bg: #1a1a1e;
-            --bg-card: #232328;
-            --bg-card-hover: #2c2c32;
-            --text: #d4d0cb;
-            --text-muted: #9a9590;
-            --accent: #c4a882;
-            --border: #353538;
+            --primary: #6c5ce7;
+            --primary-dark: #5a4bd1;
+            --bg: #0f1023;
+            --bg-card: #171934;
+            --bg-card-hover: #1f2142;
+            --text: #e8e6ff;
+            --text-muted: #a8a8c8;
+            --accent: #00d2ff;
+            --accent-2: #fd5c63;
+            --border: #2a2d52;
         }
 
         html {
             scroll-behavior: smooth;
+        }
+
+        #bg-3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
         }
 
         body {
@@ -72,6 +83,7 @@
 
         .nav-links a:hover {
             color: var(--accent);
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
         }
 
         .hamburger {
@@ -103,10 +115,30 @@
             position: absolute;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(124, 138, 110, 0.12), transparent 70%);
-            top: 20%;
-            right: 10%;
+            background: radial-gradient(circle, rgba(108, 92, 231, 0.3), transparent 70%);
+            top: 10%;
+            right: 5%;
             border-radius: 50%;
+            filter: blur(20px);
+            animation: floatGlow 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(0, 210, 255, 0.25), transparent 70%);
+            bottom: 15%;
+            left: 8%;
+            border-radius: 50%;
+            filter: blur(20px);
+            animation: floatGlow 7s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatGlow {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
         }
 
         .hero-content {
@@ -116,7 +148,7 @@
         }
 
         .hero-content .greeting {
-            color: var(--accent);
+            color: #7fb8c9;
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
             letter-spacing: 2px;
@@ -126,10 +158,17 @@
         .hero-content h1 {
             font-size: 3.5rem;
             margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, var(--text), var(--primary));
+            background: linear-gradient(135deg, #ffffff, var(--primary), var(--accent));
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .hero-content .subtitle {
@@ -169,9 +208,9 @@
         }
 
         .btn-primary:hover {
-            background: var(--primary-dark);
+            background: var(--accent);
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(124, 138, 110, 0.3);
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.5);
         }
 
         .btn-outline {
@@ -248,12 +287,13 @@
         .about-text h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: var(--accent);
+            color: var(--accent-2);
         }
 
         .about-text p {
             color: var(--text-muted);
             margin-bottom: 1.5rem;
+            text-align: justify;
         }
 
         .stats {
@@ -347,11 +387,11 @@
 
         .skill-tag {
             padding: 0.3rem 0.8rem;
-            background: rgba(124, 138, 110, 0.1);
-            color: var(--primary);
+            background: rgba(108, 92, 231, 0.15);
+            color: var(--accent);
             border-radius: 20px;
             font-size: 0.8rem;
-            border: 1px solid rgba(124, 138, 110, 0.2);
+            border: 1px solid rgba(0, 210, 255, 0.3);
         }
 
         /* Projects */
@@ -399,37 +439,6 @@
             transform: scale(1.05);
         }
 
-        .project-thumb .overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(124, 138, 110, 0.85);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .project-card:hover .overlay {
-            opacity: 1;
-        }
-
-        .overlay a {
-            padding: 0.6rem 1.2rem;
-            background: #f5f0ea;
-            color: var(--primary);
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: transform 0.3s;
-        }
-
-        .overlay a:hover {
-            transform: scale(1.05);
-        }
-
         .project-info {
             padding: 1.5rem;
         }
@@ -443,6 +452,7 @@
             color: var(--text-muted);
             font-size: 0.9rem;
             margin-bottom: 1rem;
+            text-align: justify;
         }
 
         .project-tech {
@@ -453,11 +463,11 @@
 
         .project-tech span {
             padding: 0.25rem 0.7rem;
-            background: rgba(196, 168, 130, 0.1);
+            background: rgba(108, 92, 231, 0.15);
             color: var(--accent);
             border-radius: 20px;
             font-size: 0.75rem;
-            border: 1px solid rgba(196, 168, 130, 0.2);
+            border: 1px solid rgba(0, 210, 255, 0.3);
         }
 
         /* Experience Timeline */
@@ -515,6 +525,7 @@
         .timeline-item p {
             color: var(--text-muted);
             font-size: 0.9rem;
+            text-align: justify;
         }
 
         /* Contact */
@@ -706,9 +717,13 @@
 </head>
 <body>
 
+    <!-- 3D Background -->
+    <canvas id="bg-3d"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <!-- Navbar -->
     <nav>
-        <a href="#" class="logo">AXL.</a>
+        <a href="#" class="logo">AXL</a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#about">Tentang</a></li>
             <li><a href="#projects">Proyek</a></li>
@@ -727,7 +742,7 @@
         <div class="hero-content">
             <p class="greeting">SUGENG RAWUH!!</p>
             <h1>Fauzan Axel</h1>
-            <p class="subtitle">Proplayer EPEP</p>
+            <p class="subtitle">Informatics Engineering</p>
             <p>Membangun solusi digital yang elegan dan fungsional. Bersemangat dalam menciptakan pengalaman pengguna yang luar biasa.</p>
             <div class="hero-buttons">
                 <a href="#projects" class="btn btn-primary">Lihat Proyek</a>
@@ -765,12 +780,10 @@
             <div class="project-card fade-in">
                 <div class="project-thumb">
                     <img src="xolves.png" alt="E-Commerce Platform">
-                    <div class="overlay">
-                    </div>
                 </div>
                 <div class="project-info">
                     <h3>XolveS</h3>
-                    <p>Work Management System atau XolveS merupakan aplikasi berbasis web yang dirancang untuk membantu tim dalam mengelola tugas, proyek, dan aktivitas kerja secara terstruktur. Sistem ini menyediakan fitur seperti pembuatan dan pembagian tugas, penentuan deadline, penugasan anggota, filter berdasarkan proyek, serta role-based access control. Proyek ini dikembangkan untuk meningkatkan koordinasi, efisiensi, dan transparansi dalam pengelolaan pekerjaan tim.</p>
+                    <p>XolveS adalah aplikasi berbasis web untuk membantu tim mengelola tugas dan proyek secara terstruktur. Sistem ini menyediakan fitur pembagian tugas, deadline, penugasan anggota, filter proyek, dan role-based access control untuk meningkatkan koordinasi dan efisiensi kerja.</p>
                     <div class="project-tech">
                     </div>
                 </div>
@@ -778,8 +791,6 @@
             <div class="project-card fade-in">
                 <div class="project-thumb">
                     <img src="coretax.png" alt="Dashboard Analytics">
-                    <div class="overlay">
-                    </div>
                 </div>
                 <div class="project-info">
                     <h3>CODETAX</h3>
@@ -791,12 +802,10 @@
             <div class="project-card fade-in">
                 <div class="project-thumb">
                     <img src="iot.jpeg" alt="Chat Application">
-                    <div class="overlay">
-                    </div>
                 </div>
                 <div class="project-info">
                     <h3>Smart Clock Temperature Logger</h3>
-                    <p>Smart Clock Temperature Logger merupakan proyek sistem monitoring suhu berbasis ESP32 dan sensor DHT22 yang dirancang untuk mengukur, mencatat, dan memantau kondisi suhu secara real-time. Sistem ini mengintegrasikan perangkat keras dengan web monitoring sehingga data suhu dan waktu dapat ditampilkan dan dipantau dengan lebih mudah. Proyek ini dikembangkan untuk memahami penerapan Internet of Things (IoT), komunikasi antara mikrokontroler dan sistem web, serta proses pembacaan dan pengolahan data sensor..</p>
+                    <p>Smart Clock Temperature Logger adalah sistem monitoring suhu berbasis ESP32 dan sensor DHT22 yang dapat mengukur, mencatat, dan menampilkan suhu serta waktu secara real-time melalui web monitoring. Proyek ini menerapkan konsep Internet of Things (IoT) dan komunikasi mikrokontroler dengan sistem web.</p>
                     <div class="project-tech">
                     </div>
                 </div>
@@ -831,7 +840,7 @@
     <section id="contact">
         <div class="section-title fade-in">
             <h2>Hubungi Saya</h2>
-            <p>Mari Main EPEP</p>
+            <p>Mari Berkolaborasi</p>
             <div class="line"></div>
         </div>
         <div class="contact-container">
@@ -858,6 +867,27 @@
                     <p>@fauzanaxell__</p>
                 </a>
             </div>
+            <div class="contact-form fade-in">
+                <form id="contactForm" action="https://formspree.io/f/xoeqakvz" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nama</label>
+                        <input type="text" id="name" name="name" placeholder="Nama lengkap Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Anda</label>
+                        <input type="email" id="email" name="email" placeholder="email@contoh.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subjek</label>
+                        <input type="text" id="subject" name="subject" placeholder="Subjek pesan" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Pesan</label>
+                        <textarea id="message" name="message" placeholder="Tulis pesan Anda..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -877,7 +907,7 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
             </a>
         </div>
-        <p>&copy; 2026 Fauzan. Dibuat dengan sepenuh hati.</p>
+        <p>&copy; 2026 Fauzanaxel</p>
     </footer>
 
     <script>
@@ -911,13 +941,81 @@
 
         fadeElements.forEach(el => observer.observe(el));
 
-        // Form submit
-        function handleSubmit(e) {
-            e.preventDefault();
-            alert('Terima kasih! Pesan Anda telah terkirim. Saya akan segera merespon.');
-            e.target.reset();
-        }
+        // 3D Background Effect
+        (function () {
+            const canvas = document.getElementById('bg-3d');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 60;
+
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            const palette = [
+                [108, 92, 231],
+                [0, 210, 255],
+                [253, 92, 99],
+                [188, 92, 231],
+                [255, 255, 255]
+            ].map(c => new THREE.Color(c[0] / 255, c[1] / 255, c[2] / 255));
+
+            const count = 2200;
+            const positions = new Float32Array(count * 3);
+            const colors = new Float32Array(count * 3);
+            const sizes = new Float32Array(count);
+
+            for (let i = 0; i < count; i++) {
+                positions[i * 3] = (Math.random() - 0.5) * 180;
+                positions[i * 3 + 1] = (Math.random() - 0.5) * 180;
+                positions[i * 3 + 2] = (Math.random() - 0.5) * 180;
+
+                const c = palette[Math.floor(Math.random() * palette.length)];
+                colors[i * 3] = c.r;
+                colors[i * 3 + 1] = c.g;
+                colors[i * 3 + 2] = c.b;
+
+                sizes[i] = Math.random() * 0.6 + 0.15;
+            }
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+            const material = new THREE.PointsMaterial({
+                size: 0.4,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.85,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false,
+                sizeAttenuation: true
+            });
+
+            const points = new THREE.Points(geometry, material);
+            scene.add(points);
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                points.rotation.y += 0.0012;
+                points.rotation.z += 0.0003;
+
+                renderer.render(scene, camera);
+            }
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            animate();
+        })();
+
     </script>
 
 </body>
 </html>
+
